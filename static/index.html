@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roteamento Inteligente — Q-Learning vs Dijkstra</title>
+  <script src="https://unpkg.com/vis-network@9.1.6/standalone/umd/vis-network.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Roteamento Inteligente <span>— Agente Q-Learning vs Dijkstra estático</span></h1>
+    <div class="step">Passo: <b id="step">0</b></div>
+  </header>
+
+  <main>
+    <section class="graph-panel">
+      <div class="toolbar">
+        <div class="group">
+          <label>Visualizar carga de:</label>
+          <button class="mode-btn active" data-mode="qlearning">Q-Learning</button>
+          <button class="mode-btn" data-mode="dijkstra">Dijkstra</button>
+        </div>
+        <div class="group">
+          <label for="flow">Fluxo destacado:</label>
+          <select id="flow"></select>
+        </div>
+      </div>
+
+      <div id="net"></div>
+
+      <div class="legend">
+        <span><i class="sw" style="background:#2ecc71"></i>livre</span>
+        <span><i class="sw" style="background:#f1c40f"></i>moderado</span>
+        <span><i class="sw" style="background:#e67e22"></i>alto</span>
+        <span><i class="sw" style="background:#e74c3c"></i>congestionado</span>
+        <span><i class="sw dash"></i>enlace derrubado</span>
+        <span><i class="sw" style="background:#0275d8"></i>rota Dijkstra</span>
+        <span><i class="sw" style="background:#f39c12"></i>rota Q-Learning</span>
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="card">
+        <h2>Controles ao vivo</h2>
+        <p class="hint">Escolha um enlace na lista ou clique nele no grafo.</p>
+        <div class="group edge-pick">
+          <label for="edge">Enlace:</label>
+          <select id="edge"></select>
+        </div>
+        <div class="selected">Selecionado: <b id="sel">—</b></div>
+        <div class="btn-row">
+          <button id="btn-congest" class="warn">Injetar congestão</button>
+          <button id="btn-drop" class="danger">Derrubar enlace</button>
+          <button id="btn-restore">Restaurar enlace</button>
+        </div>
+        <div class="btn-row">
+          <button id="btn-restore-all">Restaurar tudo</button>
+          <button id="btn-reset" class="ghost">Reset</button>
+        </div>
+        <div class="quick">
+          <span>Atalhos de demo:</span>
+          <button data-demo="congest-bc">Congestionar B–C</button>
+          <button data-demo="fail-cd">Falha C–D + gargalo</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Métricas comparativas</h2>
+        <table id="metrics">
+          <thead>
+            <tr><th>Métrica</th><th class="dj">Dijkstra</th><th class="ql">Q-Learning</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Latência ao longo do tempo</h2>
+        <canvas id="chart" height="150"></canvas>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+cenario,roteador,penalized_latency,avg_latency,worst_latency,max_utilization,congested_links,dropped_flows,delivered_flows
+baseline,dijkstra,34.94,34.94,43.56,0.6,0,0,3
+baseline,qlearning,32.4,32.4,39.77,0.4,0,0,3
+congestao,dijkstra,341.55,24.65,24.65,1.55,1,2,1
+congestao,qlearning,66.01,66.01,78.78,0.95,1,0,3
+falha,dijkstra,500.0,0.0,0.0,1.658,1,3,0
+falha,qlearning,62.08,62.08,76.02,0.95,1,0,3
